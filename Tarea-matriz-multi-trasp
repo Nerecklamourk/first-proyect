@@ -1,0 +1,113 @@
+//Lenguaje_c
+#include<stdio>
+
+
+int fa;
+int ca;
+int fb;
+int cb;
+int i, j, k;
+
+int A[100][100];
+int B[100][100];
+int C[100][100];
+
+
+int main(){
+	printf("Introduzca las filas de A: ");
+	scanf("%d", &fa);	
+	printf("Introduzca las columnas de A: ");
+	scanf("%d", &ca);
+	printf(" \n");
+	printf("Introduzca las filas de B: ");
+	scanf("%d", &fb);
+	printf("Introduzca las columnas de B: ");
+	scanf("%d", &cb);
+	
+    while(ca!=fb){//Este "while" asegura de que las columnas de A y las filas de B sean iguales para poder multiplicarlas
+		printf("Como el numero de columnas de la matríz A es diferente al numero de filas de la matríz B, no se pueden multiplicar las matrices \n");
+		printf("Por favor reingrese el numero de columnas de la matríz A y el numero de filas de la matríz B respectivamente \n");
+		scanf("%d", &ca);
+		scanf("%d", &fb);
+	}
+	
+	for(i=0; i<fa; i++){//Este "for" hace el ingreso de datos de la matriz A
+	   for(j=0; j<ca; j++){
+	   	printf("Ingrese el valor de la matriz B de la fila [%d] y columna [%d] ", i+1, j+1);
+	   	scanf("%d", &A[i][j]);
+	   }
+	}
+	
+    printf("\n");//Esto separa los datos para que se vea ordenado
+    
+	for(i=0; i<fa; i++){//Este for muestra los datos de la matriz A
+		printf("  \n");//Esto separa los datos de la matriz para que se vean ordenados
+	   for(j=0; j<ca; j++){
+	   	printf(" [%d] ", A[i][j]);		   	
+	   }
+	}
+	
+	printf("\n");//Esto separa los datos para que se vea ordenado
+	printf("\n");
+	
+	for(i=0; i<fb; i++){//Este "for" hace el ingreso de datos de la matriz B
+	   for(j=0; j<cb; j++){
+	   	printf("Ingrese el valor de la matriz B de la fila [%d] y columna [%d] ", i+1, j+1);
+	   	scanf("%d", &B[i][j]);
+	   }
+	}
+	
+	printf("\n");//Esto separa los datos para que se vea ordenado
+	printf("\n");
+			
+	for(i=0; i<fb; i++){//Este "for" muestra los datos de la matriz B
+		printf("  \n");//Esto separa los datos de la matriz para que se vean ordenados
+	   for(j=0; j<cb; j++){
+	   	printf(" [%d] ", B[i][j]);		   	
+	   }
+	}
+	
+	printf("\n");//Esto separa los datos para que se vea ordenado
+	printf("\n");
+	
+	for(i=0; i<fa; i++){//Esto es para mover las posiciones de C
+		for(j=0; j<cb; j++){//Esto es para mover las posiciones de C
+			C[i][j]=0;//Esto es para decir que C[i][j] tendrán un valor vacío en esa posicion (la posicion que indicará el loop del "for"), para que en el siguiente loop se pueda sumar las multiplicaciones que se hacen
+			for(k=0; k<ca; k++){//"k" aquí sirve solo para indicar posición, las cuales deven de ser iguales para las columnas de la matriz A y las filas de la matriz B
+				C[i][j]=(C[i][j]+(A[i][k]*B[k][j]));//Como en la multiplicacion de matrices solo se toma en cuenta las filas de la primera matriz y las columnas de la segunda, el resto puede ignorarse
+			}//Se le suma el "C[i][j]" para que se pueda continuar con la suma
+			//Ej: si tenemos un 1 y un 2 en la posición A[0][0] y A[0][1], respectivamente, y un 5 y 6 en la posición B[0][0] y B[0][1], respectivamente, 
+			//al multiplicarse se solucionan de la manera (1*5)+(2*6), entonces lo de arriba hace solo (1*5) pero se tiene que sumar el (2*6) lo cual se hace de la misma manera
+			//que una sumatoria, entonces se guarda el resultado de (1*5) en C[i][j] y luego se suma el C[i][j] con el resultado de A[i][k]*B[k][j] quedando como forma 
+			//de algoritmo (C[i][j]+(A[i][k]*B[k][j[)) en forma numérica queda (5+(2*6))
+		}
+	}
+	
+	printf("El resultado de la multiplicación de la matríz A con la matríz B es: \n");
+	printf(" \n");
+	
+	for(i=0; i<fa; i++){//Este "for" muestra los datos de la matriz C (la matriz resultante), como la matriz C es la multiplicacion de A y de B, esta matriz tendra la cantidad de filas de A y la cantidad de columnas de B
+		printf("  \n");//Esto separa los datos de la matriz para que se vean ordenados
+	   for(j=0; j<cb; j++){
+	   	printf(" [%d] ", C[i][j]);		   	
+	   }
+	}	
+
+	i=0;
+	j=0;
+	
+	printf("La matriz traspuesta es:\n");
+		
+	while(i<cb){
+		i=i+1;
+		printf("\n");
+		while (j<fa){
+			j=j+1;
+			printf("[%d]",C[j][i]);
+		}
+	}
+	
+	
+
+	return 0;
+}
